@@ -2,20 +2,20 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class User extends CI_Controller
 {
-    public function __construct()
+    public function _construct()
     {
-        parent::__construct();
+        parent::_construct();
         cek_login();
     }
     public function index()
     {
         $data['judul'] = 'Profil Saya';
         $data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        $this->load->view('tamplates/header', $data);
+        $this->load->view('tamplates/sidebar', $data);
+        $this->load->view('tamplates/topbar', $data);
         $this->load->view('user/index', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('tamplates/footer');
     }
     public function anggota()
     {
@@ -23,11 +23,11 @@ class User extends CI_Controller
         $data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
         $this->db->where('role_id', 1);
         $data['anggota'] = $this->db->get('user')->result_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        $this->load->view('tamplates/header', $data);
+        $this->load->view('tamplates/sidebar', $data);
+        $this->load->view('tamplates/topbar', $data);
         $this->load->view('user/anggota', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('tamplates/footer');
     }
     public function ubahProfil()
     {
@@ -38,11 +38,11 @@ class User extends CI_Controller
         ]);
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
+            $this->load->view('tamplates/header', $data);
+            $this->load->view('tamplates/sidebar', $data);
+            $this->load->view('tamplates/topbar', $data);
             $this->load->view('user/ubah-profile', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('tamplates/footer');
         } else {
             $nama = $this->input->post('nama', true);
             $email = $this->input->post('email', true);

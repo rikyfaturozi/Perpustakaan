@@ -13,10 +13,10 @@ class Adminn extends CI_Controller
         $data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
         $data['anggota'] = $this->ModelUser->getUserLimit()->result_array();
         $data['buku'] = $this->ModelBuku->getBuku()->result_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        $this->load->view('tamplates/header', $data);
+        $this->load->view('tamplates/sidebar', $data);
+        $this->load->view('tamplates/topbar', $data);
         $this->load->view('adminn/index', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('tamplates/footer');
     }
 }

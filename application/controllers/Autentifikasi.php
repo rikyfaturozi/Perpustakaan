@@ -25,7 +25,7 @@ class Autentifikasi extends CI_Controller
             $this->load->view('autentifikasi/login');
             $this->load->view('tamplates/aute_footer');
         } else {
-            $this->_login();
+            $this-> _login();
         }
     }
     private function _login()
@@ -36,11 +36,11 @@ class Autentifikasi extends CI_Controller
             
         $user = $this->ModelUser->cekData(['email' => $email])->row_array();
 
-        //jika usernya ada
+        
         if ($user) {
-            //jika user sudah aktif
+        
             if ($user['is_active'] == 1) {
-                //cek password
+               
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
@@ -136,6 +136,14 @@ class Autentifikasi extends CI_Controller
             $this->ModelUser->simpanData($data); //menggunakan model
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Selamat!! 
             akun member anda sudah dibuat. Silahkan Aktivasi Akun anda </div>'); redirect('autentifikasi');
+    
         }
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+     $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Anda telah logout!!</div>');
+        redirect('autentifikasi');
     }
 }
